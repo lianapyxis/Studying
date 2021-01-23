@@ -82,7 +82,7 @@ const addNew = (str) =>
 
 /*
 
-Write a prgram to create a new string from a given string 
+Write a program to create a new string from a given string 
 taking the first 3 characters and the last 3 characters of
 a string and adding them together. The string length must be
  3 or more, if not, the orginal string is returned.
@@ -925,3 +925,28 @@ accounts
     .filter(({balance, age}) => age < 30 && parseInt(balance.replace(/\D/g, '')) > 1500)
     .map(({friends}) => friends)
     .flat();
+
+
+/*Make a function that looks through an array of objects (first argument) 
+and returns an array of all objects that have matching name and value pairs (second argument). 
+Each name and value pair of the source object has to be present in the object 
+from the collection if it is to be included in the returned array.
+
+For example, if the first argument is [{ first: "Romeo", last: "Montague" }, 
+{ first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], 
+and the second argument is { last: "Capulet" }, then you must return 
+the third object from the array (the first argument), because it contains 
+the name and its value, that was passed on as the second argument.
+
+*/
+
+function whatIsInAName(collection, source) {
+    let sourceKeys = Object.keys(source);
+        return collection.filter(object => {
+          return sourceKeys.every(key => object.hasOwnProperty(key) && object[key] === source[key])
+        });
+        
+};
+        
+        
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
