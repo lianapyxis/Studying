@@ -993,3 +993,169 @@ function translatePigLatin(str) {
   
   translatePigLatin("consonant");
 
+
+/*
+Perform a search and replace on the sentence using the arguments provided and return the new sentence.
+
+First argument is the sentence to perform the search and replace on.
+
+Second argument is the word that you will be replacing (before).
+
+Third argument is what you will be replacing the second argument with (after).
+
+Note
+Preserve the case of the first character in the original word when you are replacing it.
+ For example if you mean to replace the word "Book" with the word "dog", it should be replaced as "Dog"
+
+ */
+
+function myReplace(str, before, after) {
+    if (before[0] === before[0].toUpperCase()) {
+      return str.replace(before, after.replace(after[0], after[0].toUpperCase()));
+    } else if (before[0] === before[0].toLowerCase() && after[0] === after[0].toUpperCase()) {
+      return str.replace(before, after.replace(after[0], after[0].toLowerCase()));
+    } else return str.replace(before, after);
+  }
+  
+  myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
+
+/*
+
+The DNA strand is missing the pairing element. Take each character, get its pair, and return the results as a 2d array.
+
+Base pairs are a pair of AT and CG. Match the missing element to the provided character.
+
+Return the provided character as the first element in each array.
+
+For example, for the input GCG, return [["G", "C"], ["C","G"],["G", "C"]]
+
+The character and its pair are paired up in an array, and all the arrays are grouped into one encapsulating array.
+
+*/
+
+function pairElement(str) {
+    let result = [];
+    for (let i = 0; i < str.length; i++) {
+     if (str[i] == "A") result.push(["A","T"]);
+     else if (str[i] == "T") result.push(["T","A"]);
+     else if (str[i] == "G") result.push(["G","C"]);
+     else result.push(["C","G"]);
+    }
+    return result;
+}
+  
+pairElement("GCG");
+
+/*
+
+Find the missing letter in the passed letter range and return it.
+
+If all letters are present in the range, return undefined.
+*/
+
+function fearNotLetter(str) {
+    for (let i = 0; i < str.length - 1; i++) {
+      if (str.charCodeAt(i + 1) != str.charCodeAt(i) + 1) {
+        return String.fromCharCode(str.charCodeAt(i) + 1);
+        } 
+      } 
+  };
+  
+  fearNotLetter("abce");
+
+/*
+
+Write a function that takes two or more arrays and returns a new array of unique values in the order of the original provided arrays.
+
+In other words, all values present from all arrays should be included in their original order, but with no duplicates in the final array.
+
+The unique numbers should be sorted by their original order, but the final array should not be sorted in numerical order.
+
+Check the assertion tests for examples.
+*/
+
+function uniteUnique(...arg) {
+    let result = [];
+    let arr = [...arg].flat();
+    arr.map(item => {
+      if (!result.includes(item)) {
+        result.push(item);
+      }
+    })
+    return result;
+}
+  
+uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
+
+/*
+
+Convert the characters &, <, >, " (double quote), and ' (apostrophe), in a string to their corresponding HTML entities.
+
+*/
+
+function convertHTML(str) {
+    // Split by character to avoid problems.
+  
+    var temp = str.split("");
+  
+    // Since we are only checking for a few HTML elements, use a switch
+  
+    for (var i = 0; i < temp.length; i++) {
+      switch (temp[i]) {
+        case "<":
+          temp[i] = "&lt;";
+          break;
+        case "&":
+          temp[i] = "&amp;";
+          break;
+        case ">":
+          temp[i] = "&gt;";
+          break;
+        case '"':
+          temp[i] = "&quot;";
+          break;
+        case "'":
+          temp[i] = "&apos;";
+          break;
+      }
+    }
+  
+    temp = temp.join("");
+    return temp;
+}
+  
+//test here
+  
+convertHTML("Dolce & Gabbana");
+
+/*
+
+Given a positive integer num, return the sum of all 
+odd Fibonacci numbers that are less than or equal to num.
+
+The first two numbers in the Fibonacci sequence are 1 and 1. 
+Every additional number in the sequence is the sum of the two previous numbers. 
+The first six numbers of the Fibonacci sequence are 1, 1, 2, 3, 5 and 8.
+
+For example, sumFibs(10) should return 10 because all 
+odd Fibonacci numbers less than or equal to 10 are 1, 1, 3, and 5.
+
+*/
+
+function sumFibs(num) {
+    var prevNumber = 0;
+    var currNumber = 1;
+    var result = 0;
+    while (currNumber <= num) {
+      if (currNumber % 2 !== 0) {
+        result += currNumber;
+      }
+  
+      currNumber += prevNumber;
+      prevNumber = currNumber - prevNumber;
+    }
+  
+    return result;
+}
+
+sumFibs(4);
