@@ -1159,3 +1159,63 @@ function sumFibs(num) {
 }
 
 sumFibs(4);
+
+
+/*
+
+A prime number is a whole number greater than 1 with exactly two divisors: 1 and itself.
+ For example, 2 is a prime number because it is only divisible by 1 and 2.
+  In contrast, 4 is not prime since it is divisible by 1, 2 and 4.
+
+Rewrite sumPrimes so it returns the sum of all prime numbers that are less than or equal to num.
+
+*/
+
+function sumPrimes(num) {
+    let arr = [];
+    let store = [];
+    for (let i = 2; i <= num; i++) {
+      if (!store[i]) {
+        arr.push(i);
+        for (let j = i << 1; j <= num; j += i) {
+          store[j] = true;
+        }
+      }
+    } return arr.reduce((acc, x) => acc + x, 0); 
+} 
+  
+sumPrimes(10);
+
+
+/*
+
+Find the smallest common multiple of the provided parameters that can be evenly divided by both,
+ as well as by all sequential numbers in the range between these parameters.
+
+The range will be an array of two numbers that will not necessarily be in numerical order.
+
+For example, if given 1 and 3, find the smallest common multiple of both 1 and 3 that is 
+also evenly divisible by all numbers between 1 and 3. The answer here would be 6.
+
+*/
+
+function smallestCommons(arr) {
+    let max = Math.max(...arr);
+     let min = Math.min(...arr);
+     // Initially the solution is assigned to the highest value of the array
+     let sol = max;
+   
+     for (let i = max - 1; i >= min; i--) {
+       // Each time the solution checks (i.e. sol%i===0) it won't be necessary
+       // to increment 'max' to our solution and restart the loop
+       if (sol % i) {
+         sol += max;
+         i = max;
+       }
+    }
+    return sol;
+}
+   
+   
+   smallestCommons([1,5]);
+
